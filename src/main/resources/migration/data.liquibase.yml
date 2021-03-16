@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: data_1
+      author: offlinebrain
+      onFail: rollback
+      changes:
+        - loadData:
+            tableName: order_status
+            columns:
+              - column:
+                  header: status
+                  name: name
+                  type: STRING
+            file: migration/data/order_status.csv
+

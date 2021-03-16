@@ -1,0 +1,145 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: offlinebrain
+      onFail: rollback
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: firstname
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: text
+              - column:
+                  name: telegramChatId
+                  type: text
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: menu
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: weight
+                  type: int
+              - column:
+                  name: category
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_menu_category
+                    references: category(id)
+                    nullable: false
+              - column:
+                  name: price
+                  type: decimal
+
+        - createTable:
+            tableName: order_status
+            columns:
+              - column:
+                  name: name
+                  type: text
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+        - createTable:
+            tableName: cart
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: customer
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_customer
+                    references: customer(id)
+              - column:
+                  name: items
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comment
+                  type: varchar(1024)
+              - column:
+                  name: delivery
+                  type: boolean
+                  defaultValue: false
+              - column:
+                  name: address
+                  type: text
+              - column:
+                  name: status
+                  type: text
+                  defaultValue: "NEW"
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_status
+                    references: order_status(name)
+              - column:
+                  name: phone
+                  type: varchar(16)
+              - column:
+                  name: createdDate
+                  type: timestamp
+              - column:
+                  name: updatedDate
+                  type: timestamp
+

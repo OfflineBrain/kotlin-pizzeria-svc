@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: migration/structure.liquibase.yml
+  - include:
+      file: migration/data.liquibase.yml
