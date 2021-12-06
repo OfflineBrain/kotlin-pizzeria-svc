@@ -1,5 +1,6 @@
 # Pizzeria Server side application
 
+Exists for personal education purposes.
 Generic application for a restaurant.
 Allows creating menu categories and positions, post orders.
 
